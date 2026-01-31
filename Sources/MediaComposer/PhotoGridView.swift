@@ -89,10 +89,14 @@ struct PhotoGridView: View {
                 selectionIndex: viewModel.selectionIndex(asset: asset),
                 onTap: { viewModel.toggleSelection(asset: asset) }
             )
+            .onAppear {
+                viewModel.loadMoreIfNeeded(currentAsset: asset)
+            }
         } else {
             Color.gray.opacity(0.3)
                 .onAppear {
                     viewModel.loadThumbnail(for: asset)
+                    viewModel.loadMoreIfNeeded(currentAsset: asset)
                 }
         }
     }

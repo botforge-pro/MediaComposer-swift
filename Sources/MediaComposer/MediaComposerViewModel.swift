@@ -11,6 +11,7 @@ final class MediaComposerViewModel {
     private(set) var thumbnails: [String: UIImage] = [:]
     private(set) var selectedAssetIDs: [String] = []
     private(set) var authorizationStatus: PHAuthorizationStatus = .notDetermined
+    private(set) var hasMoreAssets = true
 
     let maxSelection: Int
 
@@ -18,6 +19,8 @@ final class MediaComposerViewModel {
 
     private let imageManager = PHCachingImageManager()
     private let thumbnailSize = CGSize(width: 200, height: 200)
+    private let pageSize = 50
+    private var fetchResult: PHFetchResult<PHAsset>?
 
     // MARK: - Init
 
@@ -32,7 +35,16 @@ final class MediaComposerViewModel {
         authorizationStatus = status
 
         if status == .authorized || status == .limited {
-            loadAssets()
+            loadInitialAssets()
+        }
+    }
+
+    func loadMoreIfNeeded(currentAsset: PHAsset) {
+        guard hasMoreAssets else { return }
+        guard let lastAsset = assets.last else { return }
+
+        if currentAsset.localIdentifier == lastAsset.localIdentifier {
+            loadMoreAssets()
         }
     }
 
@@ -116,18 +128,31 @@ final class MediaComposerViewModel {
 
     // MARK: - Private Methods
 
-    private func loadAssets() {
+    private func loadInitialAssets() {
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        options.fetchLimit = 100
 
-        let result = PHAsset.fetchAssets(with: .image, options: options)
+        fetchResult = PHAsset.fetchAssets(with: .image, options: options)
+        loadMoreAssets()
+    }
 
-        var newAssets: [PHAsset] = []
-        result.enumerateObjects { asset, _, _ in
-            newAssets.append(asset)
+    private func loadMoreAssets() {
+        guard let fetchResult else { return }
+
+        let startIndex = assets.count
+        let endIndex = min(startIndex + pageSize, fetchResult.count)
+
+        guard startIndex < endIndex else {
+            hasMoreAssets = false
+            return
         }
 
-        assets = newAssets
+        var newAssets: [PHAsset] = []
+        for i in startIndex..<endIndex {
+            newAssets.append(fetchResult.object(at: i))
+        }
+
+        assets.append(contentsOf: newAssets)
+        hasMoreAssets = endIndex < fetchResult.count
     }
 }
