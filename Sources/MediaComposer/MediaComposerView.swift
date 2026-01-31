@@ -2,8 +2,10 @@ import SwiftUI
 import UIKit
 
 public struct MediaComposerView: View {
+    public typealias Coordinates = (latitude: Double, longitude: Double)
+
     private let configuration: MediaComposerConfiguration
-    private let onSend: ([UIImage], String?) -> Void
+    private let onSend: ([UIImage], String?, Coordinates?) -> Void
     private let onCancel: () -> Void
 
     @State private var viewModel: MediaComposerViewModel
@@ -12,7 +14,7 @@ public struct MediaComposerView: View {
 
     public init(
         configuration: MediaComposerConfiguration = .default,
-        onSend: @escaping ([UIImage], String?) -> Void,
+        onSend: @escaping ([UIImage], String?, Coordinates?) -> Void,
         onCancel: @escaping () -> Void
     ) {
         self.configuration = configuration
@@ -72,7 +74,7 @@ public struct MediaComposerView: View {
         }
         .fullScreenCover(isPresented: $showCamera) {
             CameraView { image in
-                onSend([image], captionToSend)
+                onSend([image], captionToSend, nil)
             }
         }
     }
@@ -151,7 +153,8 @@ public struct MediaComposerView: View {
         Task {
             let images = await viewModel.getSelectedImages()
             guard !images.isEmpty else { return }
-            onSend(images, captionToSend)
+            let coordinates = viewModel.getFirstCoordinates()
+            onSend(images, captionToSend, coordinates)
         }
     }
 }

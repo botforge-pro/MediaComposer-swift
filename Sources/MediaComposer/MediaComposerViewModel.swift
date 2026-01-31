@@ -126,6 +126,15 @@ final class MediaComposerViewModel {
         return images
     }
 
+    func getFirstCoordinates() -> (latitude: Double, longitude: Double)? {
+        for id in selectedAssetIDs {
+            guard let asset = assets.first(where: { $0.localIdentifier == id }),
+                  let location = asset.location else { continue }
+            return (location.coordinate.latitude, location.coordinate.longitude)
+        }
+        return nil
+    }
+
     // MARK: - Private Methods
 
     private func loadInitialAssets() {
