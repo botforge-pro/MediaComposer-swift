@@ -1,3 +1,4 @@
+import CoreLocation
 import Photos
 import SwiftUI
 import UIKit
@@ -126,11 +127,11 @@ final class MediaComposerViewModel {
         return images
     }
 
-    func getFirstCoordinates() -> (latitude: Double, longitude: Double)? {
+    func getFirstCoordinates() -> CLLocationCoordinate2D? {
         for id in selectedAssetIDs {
             guard let asset = assets.first(where: { $0.localIdentifier == id }),
                   let location = asset.location else { continue }
-            return (location.coordinate.latitude, location.coordinate.longitude)
+            return location.coordinate
         }
         return nil
     }
