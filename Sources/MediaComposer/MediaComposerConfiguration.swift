@@ -1,7 +1,7 @@
 import Foundation
 
 /// Configuration for MediaComposer behavior
-public struct MediaComposerConfiguration {
+public struct MediaComposerConfiguration: Sendable {
     /// Camera cell visibility
     public let showCamera: Bool
 
@@ -12,7 +12,7 @@ public struct MediaComposerConfiguration {
     public let captionMode: CaptionMode
 
     /// Caption input mode options
-    public enum CaptionMode {
+    public enum CaptionMode: Sendable {
         /// No caption input shown
         case none
         /// Caption is optional (send button enabled without caption)
