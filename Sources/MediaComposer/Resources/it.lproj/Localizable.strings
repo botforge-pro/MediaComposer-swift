@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Italian
+*/
 "mediaComposer.albumRecent" = "Recenti";
 "mediaComposer.captionPlaceholder" = "Aggiungi didascalia...";
+"mediaComposer.send" = "Invia";

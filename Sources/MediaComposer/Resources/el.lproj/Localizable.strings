@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Greek
+*/
 "mediaComposer.albumRecent" = "Πρόσφατα";
 "mediaComposer.captionPlaceholder" = "Προσθήκη λεζάντας...";
+"mediaComposer.send" = "Αποστολή";

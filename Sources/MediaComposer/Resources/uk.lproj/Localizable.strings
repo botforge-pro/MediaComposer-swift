@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Ukrainian
+*/
 "mediaComposer.albumRecent" = "Нещодавні";
 "mediaComposer.captionPlaceholder" = "Додайте опис...";
+"mediaComposer.send" = "Надіслати";

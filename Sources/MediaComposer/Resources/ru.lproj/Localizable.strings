@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Russian
+*/
 "mediaComposer.albumRecent" = "Недавние";
 "mediaComposer.captionPlaceholder" = "Добавьте описание...";
+"mediaComposer.send" = "Отправить";

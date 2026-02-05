@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Japanese
+*/
 "mediaComposer.albumRecent" = "最近";
 "mediaComposer.captionPlaceholder" = "キャプションを追加...";
+"mediaComposer.send" = "送信";

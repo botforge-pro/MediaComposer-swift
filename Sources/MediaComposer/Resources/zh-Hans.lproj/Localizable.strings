@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Chinese (Simplified)
+*/
 "mediaComposer.albumRecent" = "最近";
 "mediaComposer.captionPlaceholder" = "添加说明...";
+"mediaComposer.send" = "发送";

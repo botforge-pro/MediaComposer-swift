@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Thai
+*/
 "mediaComposer.albumRecent" = "ล่าสุด";
 "mediaComposer.captionPlaceholder" = "เพิ่มคำบรรยาย...";
+"mediaComposer.send" = "ส่ง";

@@ -133,15 +133,16 @@ public struct MediaComposerView: View {
     }
 
     private var bottomBar: some View {
-        HStack {
-            Spacer()
-            Button(action: handleSend) {
-                Image(systemName: "arrow.up.circle.fill")
-                    .font(.system(size: 32))
-                    .foregroundStyle(isSendEnabled ? .blue : .gray)
-            }
-            .disabled(!isSendEnabled)
+        Button(action: handleSend) {
+            Text(L10n.mediaComposerSend)
+                .fontWeight(.semibold)
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(isSendEnabled ? .blue : .gray)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
         }
+        .disabled(!isSendEnabled)
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
         .background(.bar)

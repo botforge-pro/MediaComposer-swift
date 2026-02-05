@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Finnish
+*/
 "mediaComposer.albumRecent" = "Viimeisimmät";
 "mediaComposer.captionPlaceholder" = "Lisää kuvateksti...";
+"mediaComposer.send" = "Lähetä";

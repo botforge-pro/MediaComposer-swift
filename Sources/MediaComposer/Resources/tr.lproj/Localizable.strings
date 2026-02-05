@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Turkish
+*/
 "mediaComposer.albumRecent" = "Son";
 "mediaComposer.captionPlaceholder" = "Açıklama ekle...";
+"mediaComposer.send" = "Gönder";

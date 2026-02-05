@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Danish
+*/
 "mediaComposer.albumRecent" = "Seneste";
 "mediaComposer.captionPlaceholder" = "Tilføj en beskrivelse...";
+"mediaComposer.send" = "Send";

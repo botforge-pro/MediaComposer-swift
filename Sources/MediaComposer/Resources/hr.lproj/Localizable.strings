@@ -2,7 +2,7 @@
   Localizable.strings
   QRServe
 
-  Serbian (Latin)
+  hr
 */
 "mediaComposer.albumRecent" = "Nedavno";
 "mediaComposer.captionPlaceholder" = "Dodajte opis...";

@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Swedish
+*/
 "mediaComposer.albumRecent" = "Senaste";
 "mediaComposer.captionPlaceholder" = "Lägg till en bildtext...";
+"mediaComposer.send" = "Skicka";

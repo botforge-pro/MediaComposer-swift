@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Indonesian
+*/
 "mediaComposer.albumRecent" = "Terbaru";
 "mediaComposer.captionPlaceholder" = "Tambahkan keterangan...";
+"mediaComposer.send" = "Kirim";

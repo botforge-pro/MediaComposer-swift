@@ -1,0 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  ka
+*/
+"mediaComposer.albumRecent" = "ბოლო";
+"mediaComposer.captionPlaceholder" = "დაამატეთ აღწერა...";
+"mediaComposer.send" = "გაგზავნა";

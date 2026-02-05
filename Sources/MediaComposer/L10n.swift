@@ -10,4 +10,9 @@ enum L10n {
         localized: "mediaComposer.captionPlaceholder",
         bundle: .module
     )
+
+    static let mediaComposerSend = String(
+        localized: "mediaComposer.send",
+        bundle: .module
+    )
 }

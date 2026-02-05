@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Vietnamese
+*/
 "mediaComposer.albumRecent" = "Gần đây";
 "mediaComposer.captionPlaceholder" = "Thêm mô tả...";
+"mediaComposer.send" = "Gửi";

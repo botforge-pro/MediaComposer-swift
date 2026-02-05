@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Dutch
+*/
 "mediaComposer.albumRecent" = "Recent";
 "mediaComposer.captionPlaceholder" = "Voeg een bijschrift toe...";
+"mediaComposer.send" = "Verzenden";

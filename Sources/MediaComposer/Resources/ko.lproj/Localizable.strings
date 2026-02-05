@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Korean
+*/
 "mediaComposer.albumRecent" = "최근";
 "mediaComposer.captionPlaceholder" = "설명 추가...";
+"mediaComposer.send" = "보내기";

@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  French
+*/
 "mediaComposer.albumRecent" = "Récents";
 "mediaComposer.captionPlaceholder" = "Ajouter une légende...";
+"mediaComposer.send" = "Envoyer";

@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  English
+*/
 "mediaComposer.albumRecent" = "Recent";
 "mediaComposer.captionPlaceholder" = "Add a caption...";
+"mediaComposer.send" = "Send";

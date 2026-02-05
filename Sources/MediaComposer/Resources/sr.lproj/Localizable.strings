@@ -1,2 +1,9 @@
+/*
+  Localizable.strings
+  QRServe
+
+  Serbian (Cyrillic)
+*/
 "mediaComposer.albumRecent" = "Недавно";
 "mediaComposer.captionPlaceholder" = "Додајте опис...";
+"mediaComposer.send" = "Пошаљи";
