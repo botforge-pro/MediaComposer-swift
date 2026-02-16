@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "Senaste";
 "mediaComposer.captionPlaceholder" = "Lägg till en bildtext...";
+"mediaComposer.openSettings" = "Öppna Inställningar";
+"mediaComposer.photoAccessMessage" = "Tillåt åtkomst till dina foton i Inställningar";
 "mediaComposer.send" = "Skicka";

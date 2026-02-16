@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "最近";
 "mediaComposer.captionPlaceholder" = "キャプションを追加...";
+"mediaComposer.openSettings" = "設定を開く";
+"mediaComposer.photoAccessMessage" = "設定で写真へのアクセスを許可してください";
 "mediaComposer.send" = "送信";

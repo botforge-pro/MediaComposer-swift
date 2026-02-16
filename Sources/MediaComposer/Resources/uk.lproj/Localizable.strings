@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "Нещодавні";
 "mediaComposer.captionPlaceholder" = "Додайте опис...";
+"mediaComposer.openSettings" = "Відкрити налаштування";
+"mediaComposer.photoAccessMessage" = "Дозвольте доступ до фотографій у налаштуваннях";
 "mediaComposer.send" = "Надіслати";

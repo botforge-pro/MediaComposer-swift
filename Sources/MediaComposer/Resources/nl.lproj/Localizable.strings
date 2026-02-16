@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "Recent";
 "mediaComposer.captionPlaceholder" = "Voeg een bijschrift toe...";
+"mediaComposer.openSettings" = "Open Instellingen";
+"mediaComposer.photoAccessMessage" = "Sta toegang tot je foto's toe in Instellingen";
 "mediaComposer.send" = "Verzenden";

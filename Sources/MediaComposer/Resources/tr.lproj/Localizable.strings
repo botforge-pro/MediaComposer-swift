@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "Son";
 "mediaComposer.captionPlaceholder" = "Açıklama ekle...";
+"mediaComposer.openSettings" = "Ayarları Aç";
+"mediaComposer.photoAccessMessage" = "Ayarlardan fotoğraflarınıza erişime izin verin";
 "mediaComposer.send" = "Gönder";

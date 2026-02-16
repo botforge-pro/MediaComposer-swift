@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "最近";
 "mediaComposer.captionPlaceholder" = "添加说明...";
+"mediaComposer.openSettings" = "打开设置";
+"mediaComposer.photoAccessMessage" = "请在设置中允许访问您的照片";
 "mediaComposer.send" = "发送";

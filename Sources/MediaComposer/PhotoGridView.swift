@@ -14,17 +14,59 @@ struct PhotoGridView: View {
         (UIScreen.main.bounds.width - spacing * 2) / 3
     }
 
+    private var hasPhotoAccess: Bool {
+        viewModel.authorizationStatus == .authorized || viewModel.authorizationStatus == .limited
+    }
+
     var body: some View {
         ScrollView {
             VStack(spacing: spacing) {
                 if showCameraCell {
-                    topSectionWithCamera
-                    photosGrid(startingAt: 4)
-                } else {
+                    if hasPhotoAccess {
+                        topSectionWithCamera
+                        photosGrid(startingAt: 4)
+                    } else {
+                        HStack(spacing: spacing) {
+                            CameraPreviewCell(onTap: onCameraTap)
+                                .frame(width: cellSize, height: cellSize * 2 + spacing)
+
+                            photoAccessDeniedView
+                        }
+                    }
+                } else if hasPhotoAccess {
                     photosGrid(startingAt: 0)
+                } else {
+                    photoAccessDeniedView
+                        .padding(.top, 40)
                 }
             }
         }
+    }
+
+    // MARK: - Photo Access Denied
+
+    private var photoAccessDeniedView: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "photo.on.rectangle.angled")
+                .font(.system(size: 32))
+                .foregroundStyle(.secondary)
+
+            Text(L10n.mediaComposerPhotoAccessMessage)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+
+            Button {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+            } label: {
+                Text(L10n.mediaComposerOpenSettings)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     // MARK: - Top Section with Camera

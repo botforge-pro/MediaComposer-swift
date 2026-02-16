@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "Gần đây";
 "mediaComposer.captionPlaceholder" = "Thêm mô tả...";
+"mediaComposer.openSettings" = "Mở Cài đặt";
+"mediaComposer.photoAccessMessage" = "Cho phép truy cập ảnh trong Cài đặt";
 "mediaComposer.send" = "Gửi";

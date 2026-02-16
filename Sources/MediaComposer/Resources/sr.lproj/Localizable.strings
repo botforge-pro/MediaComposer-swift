@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "Недавно";
 "mediaComposer.captionPlaceholder" = "Додајте опис...";
+"mediaComposer.openSettings" = "Отвори подешавања";
+"mediaComposer.photoAccessMessage" = "Дозволите приступ фотографијама у подешавањима";
 "mediaComposer.send" = "Пошаљи";

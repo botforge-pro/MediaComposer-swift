@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "Viimeisimmät";
 "mediaComposer.captionPlaceholder" = "Lisää kuvateksti...";
+"mediaComposer.openSettings" = "Avaa Asetukset";
+"mediaComposer.photoAccessMessage" = "Salli pääsy kuviisi Asetuksissa";
 "mediaComposer.send" = "Lähetä";

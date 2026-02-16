@@ -11,6 +11,16 @@ enum L10n {
         bundle: .module
     )
 
+    static let mediaComposerOpenSettings = String(
+        localized: "mediaComposer.openSettings",
+        bundle: .module
+    )
+
+    static let mediaComposerPhotoAccessMessage = String(
+        localized: "mediaComposer.photoAccessMessage",
+        bundle: .module
+    )
+
     static let mediaComposerSend = String(
         localized: "mediaComposer.send",
         bundle: .module

@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "Terbaru";
 "mediaComposer.captionPlaceholder" = "Tambahkan keterangan...";
+"mediaComposer.openSettings" = "Buka Pengaturan";
+"mediaComposer.photoAccessMessage" = "Izinkan akses ke foto Anda di Pengaturan";
 "mediaComposer.send" = "Kirim";

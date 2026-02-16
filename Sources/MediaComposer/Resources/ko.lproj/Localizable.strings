@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "최근";
 "mediaComposer.captionPlaceholder" = "설명 추가...";
+"mediaComposer.openSettings" = "설정 열기";
+"mediaComposer.photoAccessMessage" = "설정에서 사진 접근을 허용해 주세요";
 "mediaComposer.send" = "보내기";

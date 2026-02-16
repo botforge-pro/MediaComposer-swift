@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "Seneste";
 "mediaComposer.captionPlaceholder" = "Tilføj en beskrivelse...";
+"mediaComposer.openSettings" = "Åbn Indstillinger";
+"mediaComposer.photoAccessMessage" = "Tillad adgang til dine fotos i Indstillinger";
 "mediaComposer.send" = "Send";

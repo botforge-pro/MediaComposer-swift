@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "Recenti";
 "mediaComposer.captionPlaceholder" = "Aggiungi didascalia...";
+"mediaComposer.openSettings" = "Apri Impostazioni";
+"mediaComposer.photoAccessMessage" = "Consenti l'accesso alle tue foto nelle Impostazioni";
 "mediaComposer.send" = "Invia";

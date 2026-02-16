@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "Neueste";
 "mediaComposer.captionPlaceholder" = "Beschreibung hinzufügen...";
+"mediaComposer.openSettings" = "Einstellungen öffnen";
+"mediaComposer.photoAccessMessage" = "Erlaube den Zugriff auf deine Fotos in den Einstellungen";
 "mediaComposer.send" = "Senden";

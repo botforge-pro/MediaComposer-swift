@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "Recentes";
 "mediaComposer.captionPlaceholder" = "Adicionar legenda...";
+"mediaComposer.openSettings" = "Abrir Definições";
+"mediaComposer.photoAccessMessage" = "Permita o acesso às suas fotos nas Definições";
 "mediaComposer.send" = "Enviar";

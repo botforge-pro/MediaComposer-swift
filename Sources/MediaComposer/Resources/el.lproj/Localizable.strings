@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "Πρόσφατα";
 "mediaComposer.captionPlaceholder" = "Προσθήκη λεζάντας...";
+"mediaComposer.openSettings" = "Άνοιγμα Ρυθμίσεων";
+"mediaComposer.photoAccessMessage" = "Επιτρέψτε πρόσβαση στις φωτογραφίες σας στις Ρυθμίσεις";
 "mediaComposer.send" = "Αποστολή";

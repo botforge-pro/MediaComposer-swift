@@ -6,4 +6,6 @@
 */
 "mediaComposer.albumRecent" = "ბოლო";
 "mediaComposer.captionPlaceholder" = "დაამატეთ აღწერა...";
+"mediaComposer.openSettings" = "პარამეტრების გახსნა";
+"mediaComposer.photoAccessMessage" = "დაუშვით ფოტოებზე წვდომა პარამეტრებში";
 "mediaComposer.send" = "გაგზავნა";
