@@ -18,10 +18,17 @@ struct PhotoGridView: View {
         viewModel.authorizationStatus == .authorized || viewModel.authorizationStatus == .limited
     }
 
+    private var isCheckingAuthorization: Bool {
+        viewModel.authorizationStatus == .notDetermined
+    }
+
     var body: some View {
         ScrollView {
             VStack(spacing: spacing) {
-                if showCameraCell {
+                if isCheckingAuthorization {
+                    ProgressView()
+                        .frame(maxWidth: .infinity, minHeight: 200)
+                } else if showCameraCell {
                     if hasPhotoAccess {
                         topSectionWithCamera
                         photosGrid(startingAt: 4)

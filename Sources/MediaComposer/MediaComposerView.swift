@@ -5,19 +5,23 @@ import UIKit
 public struct MediaComposerView: View {
     private let configuration: MediaComposerConfiguration
     private let onSend: (MediaComposerResult) -> Void
+    private let onError: (Error) -> Void
     private let onCancel: () -> Void
 
     @State private var viewModel: MediaComposerViewModel
     @State private var caption = ""
     @State private var showCamera = false
+    @State private var isSending = false
 
     public init(
         configuration: MediaComposerConfiguration = .default,
         onSend: @escaping (MediaComposerResult) -> Void,
+        onError: @escaping (Error) -> Void,
         onCancel: @escaping () -> Void
     ) {
         self.configuration = configuration
         self.onSend = onSend
+        self.onError = onError
         self.onCancel = onCancel
         self._viewModel = State(initialValue: MediaComposerViewModel(maxSelection: configuration.maxSelection))
     }
@@ -30,12 +34,14 @@ public struct MediaComposerView: View {
                     showCameraCell: configuration.showCamera,
                     onCameraTap: { showCamera = true }
                 )
+                .allowsHitTesting(!isSending)
 
                 if configuration.captionMode != .none {
                     CaptionInputView(
                         caption: $caption,
                         selectionCount: viewModel.selectedAssetIDs.count,
                         isSendEnabled: isSendEnabled,
+                        isSending: isSending,
                         onSend: handleSend
                     )
                 } else {
@@ -53,6 +59,7 @@ public struct MediaComposerView: View {
                             .clipShape(Circle())
                     }
                     .buttonStyle(.plain)
+                    .disabled(isSending)
                 }
 
                 ToolbarItem(placement: .principal) {
@@ -68,6 +75,7 @@ public struct MediaComposerView: View {
         }
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
+        .interactiveDismissDisabled(isSending)
         .task {
             await viewModel.requestAuthorization()
         }
@@ -134,15 +142,22 @@ public struct MediaComposerView: View {
 
     private var bottomBar: some View {
         Button(action: handleSend) {
-            Text(L10n.mediaComposerSend)
-                .fontWeight(.semibold)
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
-                .background(isSendEnabled ? .blue : .gray)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+            Group {
+                if isSending {
+                    ProgressView()
+                        .tint(.white)
+                } else {
+                    Text(L10n.mediaComposerSend)
+                        .fontWeight(.semibold)
+                }
+            }
+            .foregroundStyle(.white)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 14)
+            .background(isSendEnabled && !isSending ? .blue : .gray)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
-        .disabled(!isSendEnabled)
+        .disabled(!isSendEnabled || isSending)
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
         .background(.bar)
@@ -151,12 +166,18 @@ public struct MediaComposerView: View {
     // MARK: - Actions
 
     private func handleSend() {
+        guard !isSending else { return }
+        isSending = true
         Task {
-            let images = await viewModel.getSelectedImages()
-            guard !images.isEmpty else { return }
-            let coordinates = viewModel.getFirstCoordinates()
-            let result = MediaComposerResult(images: images, caption: captionToSend, coordinates: coordinates)
-            onSend(result)
+            do {
+                let images = try await viewModel.getSelectedImages()
+                let coordinates = viewModel.getFirstCoordinates()
+                let result = MediaComposerResult(images: images, caption: captionToSend, coordinates: coordinates)
+                onSend(result)
+            } catch {
+                isSending = false
+                onError(error)
+            }
         }
     }
 }

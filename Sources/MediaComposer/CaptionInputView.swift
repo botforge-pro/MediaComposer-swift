@@ -4,6 +4,7 @@ struct CaptionInputView: View {
     @Binding var caption: String
     let selectionCount: Int
     let isSendEnabled: Bool
+    let isSending: Bool
     let onSend: () -> Void
 
     var body: some View {
@@ -14,6 +15,7 @@ struct CaptionInputView: View {
                 .padding(.vertical, 10)
                 .background(Color(.systemGray5))
                 .clipShape(Capsule())
+                .disabled(isSending)
 
             sendButton
         }
@@ -24,11 +26,16 @@ struct CaptionInputView: View {
 
     @ViewBuilder
     private var sendButton: some View {
-        Button(action: onSend) {
-            Image(systemName: "arrow.up.circle.fill")
-                .font(.system(size: 32))
-                .foregroundStyle(isSendEnabled ? .blue : .gray)
+        if isSending {
+            ProgressView()
+                .frame(width: 32, height: 32)
+        } else {
+            Button(action: onSend) {
+                Image(systemName: "arrow.up.circle.fill")
+                    .font(.system(size: 32))
+                    .foregroundStyle(isSendEnabled ? .blue : .gray)
+            }
+            .disabled(!isSendEnabled)
         }
-        .disabled(!isSendEnabled)
     }
 }

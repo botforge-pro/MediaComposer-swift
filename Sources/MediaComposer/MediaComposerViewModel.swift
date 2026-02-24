@@ -93,13 +93,13 @@ final class MediaComposerViewModel {
         }
     }
 
-    func loadFullImage(for asset: PHAsset) async -> UIImage? {
+    func loadFullImage(for asset: PHAsset) async throws -> UIImage {
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
         options.deliveryMode = .highQualityFormat
         options.isSynchronous = false
 
-        return await withCheckedContinuation { continuation in
+        return try await withCheckedThrowingContinuation { continuation in
             imageManager.requestImage(
                 for: asset,
                 targetSize: PHImageManagerMaximumSize,
@@ -107,21 +107,30 @@ final class MediaComposerViewModel {
                 options: options
             ) { image, info in
                 let isDegraded = (info?[PHImageResultIsDegradedKey] as? Bool) ?? false
-                if !isDegraded {
+                guard !isDegraded else { return }
+
+                if let error = info?[PHImageErrorKey] as? Error {
+                    continuation.resume(throwing: error)
+                } else if let image {
                     continuation.resume(returning: image)
+                } else {
+                    continuation.resume(throwing: NSError(
+                        domain: "MediaComposer",
+                        code: -1,
+                        userInfo: [NSLocalizedDescriptionKey: "PHImageManager returned nil image"]
+                    ))
                 }
             }
         }
     }
 
-    func getSelectedImages() async -> [UIImage] {
+    func getSelectedImages() async throws -> [UIImage] {
         var images: [UIImage] = []
 
         for id in selectedAssetIDs {
             guard let asset = assets.first(where: { $0.localIdentifier == id }) else { continue }
-            if let image = await loadFullImage(for: asset) {
-                images.append(image)
-            }
+            let image = try await loadFullImage(for: asset)
+            images.append(image)
         }
 
         return images
