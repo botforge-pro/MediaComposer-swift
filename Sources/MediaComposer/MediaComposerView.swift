@@ -69,6 +69,16 @@ public struct MediaComposerView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     if viewModel.selectedAssetIDs.count > 0 {
                         selectionBadge
+                    } else {
+                        Button(action: handlePaste) {
+                            Image(systemName: "doc.on.clipboard")
+                                .fontWeight(.semibold)
+                                .frame(width: 36, height: 36)
+                                .background(Color(.systemGray5))
+                                .clipShape(Circle())
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(isSending)
                     }
                 }
             }
@@ -164,6 +174,15 @@ public struct MediaComposerView: View {
     }
 
     // MARK: - Actions
+
+    private func handlePaste() {
+        guard let image = UIPasteboard.general.image else {
+            onError(MediaComposerError.noImageInClipboard)
+            return
+        }
+        let result = MediaComposerResult(images: [image], caption: captionToSend, coordinates: nil)
+        onSend(result)
+    }
 
     private func handleSend() {
         guard !isSending else { return }

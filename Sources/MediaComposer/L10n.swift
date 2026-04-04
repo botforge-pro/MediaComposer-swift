@@ -25,4 +25,5 @@ enum L10n {
         localized: "mediaComposer.send",
         bundle: .module
     )
+
 }

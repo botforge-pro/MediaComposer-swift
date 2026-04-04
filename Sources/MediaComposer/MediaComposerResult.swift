@@ -1,6 +1,17 @@
 import CoreLocation
 import UIKit
 
+public enum MediaComposerError: LocalizedError {
+    case noImageInClipboard
+
+    public var errorDescription: String? {
+        switch self {
+        case .noImageInClipboard:
+            return "No image in clipboard"
+        }
+    }
+}
+
 public struct MediaComposerResult {
     public let images: [UIImage]
     public let caption: String?
