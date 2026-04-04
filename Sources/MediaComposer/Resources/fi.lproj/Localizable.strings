@@ -5,7 +5,9 @@
   Finnish
 */
 "mediaComposer.albumRecent" = "Viimeisimmät";
+"mediaComposer.cancel" = "Kumoa";
 "mediaComposer.captionPlaceholder" = "Lisää kuvateksti...";
+"mediaComposer.clipboard" = "Leikepöytä";
 "mediaComposer.openSettings" = "Avaa Asetukset";
 "mediaComposer.photoAccessMessage" = "Salli pääsy kuviisi Asetuksissa";
 "mediaComposer.send" = "Lähetä";

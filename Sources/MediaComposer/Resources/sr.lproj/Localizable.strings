@@ -5,7 +5,9 @@
   Serbian (Cyrillic)
 */
 "mediaComposer.albumRecent" = "Недавно";
+"mediaComposer.cancel" = "Откажи";
 "mediaComposer.captionPlaceholder" = "Додајте опис...";
+"mediaComposer.clipboard" = "Међуспремник";
 "mediaComposer.openSettings" = "Отвори подешавања";
 "mediaComposer.photoAccessMessage" = "Дозволите приступ фотографијама у подешавањима";
 "mediaComposer.send" = "Пошаљи";

@@ -5,7 +5,9 @@
   Dutch
 */
 "mediaComposer.albumRecent" = "Recent";
+"mediaComposer.cancel" = "Annuleren";
 "mediaComposer.captionPlaceholder" = "Voeg een bijschrift toe...";
+"mediaComposer.clipboard" = "Klembord";
 "mediaComposer.openSettings" = "Open Instellingen";
 "mediaComposer.photoAccessMessage" = "Sta toegang tot je foto's toe in Instellingen";
 "mediaComposer.send" = "Verzenden";

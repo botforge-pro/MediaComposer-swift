@@ -5,7 +5,9 @@
   Russian
 */
 "mediaComposer.albumRecent" = "Недавние";
+"mediaComposer.cancel" = "Отмена";
 "mediaComposer.captionPlaceholder" = "Добавьте описание...";
+"mediaComposer.clipboard" = "Буфер обмена";
 "mediaComposer.openSettings" = "Открыть настройки";
 "mediaComposer.photoAccessMessage" = "Разрешите доступ к фотографиям в настройках";
 "mediaComposer.send" = "Отправить";

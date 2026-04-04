@@ -5,7 +5,9 @@
   hr
 */
 "mediaComposer.albumRecent" = "Nedavno";
+"mediaComposer.cancel" = "Otkaži";
 "mediaComposer.captionPlaceholder" = "Dodajte opis...";
+"mediaComposer.clipboard" = "Međuspremnik";
 "mediaComposer.openSettings" = "Otvori postavke";
 "mediaComposer.photoAccessMessage" = "Dozvolite pristup fotografijama u postavkama";
 "mediaComposer.send" = "Pošalji";

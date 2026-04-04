@@ -5,7 +5,9 @@
   Indonesian
 */
 "mediaComposer.albumRecent" = "Terbaru";
+"mediaComposer.cancel" = "Batal";
 "mediaComposer.captionPlaceholder" = "Tambahkan keterangan...";
+"mediaComposer.clipboard" = "Papan klip";
 "mediaComposer.openSettings" = "Buka Pengaturan";
 "mediaComposer.photoAccessMessage" = "Izinkan akses ke foto Anda di Pengaturan";
 "mediaComposer.send" = "Kirim";

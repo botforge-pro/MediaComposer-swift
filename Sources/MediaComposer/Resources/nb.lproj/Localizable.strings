@@ -5,7 +5,9 @@
   Norwegian Bokmål
 */
 "mediaComposer.albumRecent" = "Nylige";
+"mediaComposer.cancel" = "Avbryt";
 "mediaComposer.captionPlaceholder" = "Legg til en beskrivelse...";
+"mediaComposer.clipboard" = "Utklippstavle";
 "mediaComposer.openSettings" = "Åpne Innstillinger";
 "mediaComposer.photoAccessMessage" = "Tillat tilgang til bildene dine i Innstillinger";
 "mediaComposer.send" = "Send";

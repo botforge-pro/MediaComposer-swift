@@ -5,7 +5,9 @@
   Portuguese (Brazil)
 */
 "mediaComposer.albumRecent" = "Recentes";
+"mediaComposer.cancel" = "Cancelar";
 "mediaComposer.captionPlaceholder" = "Adicionar legenda...";
+"mediaComposer.clipboard" = "Área de transferência";
 "mediaComposer.openSettings" = "Abrir Configurações";
 "mediaComposer.photoAccessMessage" = "Permita o acesso às suas fotos nas Configurações";
 "mediaComposer.send" = "Enviar";

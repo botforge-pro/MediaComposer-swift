@@ -5,7 +5,9 @@
   Danish
 */
 "mediaComposer.albumRecent" = "Seneste";
+"mediaComposer.cancel" = "Annuller";
 "mediaComposer.captionPlaceholder" = "Tilføj en beskrivelse...";
+"mediaComposer.clipboard" = "Udklipsholder";
 "mediaComposer.openSettings" = "Åbn Indstillinger";
 "mediaComposer.photoAccessMessage" = "Tillad adgang til dine fotos i Indstillinger";
 "mediaComposer.send" = "Send";

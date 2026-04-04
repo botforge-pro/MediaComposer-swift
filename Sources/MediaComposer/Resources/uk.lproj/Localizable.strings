@@ -5,7 +5,9 @@
   Ukrainian
 */
 "mediaComposer.albumRecent" = "Нещодавні";
+"mediaComposer.cancel" = "Скасувати";
 "mediaComposer.captionPlaceholder" = "Додайте опис...";
+"mediaComposer.clipboard" = "Буфер обміну";
 "mediaComposer.openSettings" = "Відкрити налаштування";
 "mediaComposer.photoAccessMessage" = "Дозвольте доступ до фотографій у налаштуваннях";
 "mediaComposer.send" = "Надіслати";

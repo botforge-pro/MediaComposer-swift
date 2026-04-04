@@ -5,7 +5,9 @@
   Spanish (Mexico)
 */
 "mediaComposer.albumRecent" = "Recientes";
+"mediaComposer.cancel" = "Cancelar";
 "mediaComposer.captionPlaceholder" = "Añadir descripción...";
+"mediaComposer.clipboard" = "Portapapeles";
 "mediaComposer.openSettings" = "Abrir Ajustes";
 "mediaComposer.photoAccessMessage" = "Permite el acceso a tus fotos en Ajustes";
 "mediaComposer.send" = "Enviar";

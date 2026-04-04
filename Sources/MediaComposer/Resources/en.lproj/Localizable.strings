@@ -5,7 +5,9 @@
   English
 */
 "mediaComposer.albumRecent" = "Recent";
+"mediaComposer.cancel" = "Cancel";
 "mediaComposer.captionPlaceholder" = "Add a caption...";
+"mediaComposer.clipboard" = "Clipboard";
 "mediaComposer.openSettings" = "Open Settings";
 "mediaComposer.photoAccessMessage" = "Allow access to your photos in Settings";
 "mediaComposer.send" = "Send";

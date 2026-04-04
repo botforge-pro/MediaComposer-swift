@@ -5,7 +5,9 @@
   Italian
 */
 "mediaComposer.albumRecent" = "Recenti";
+"mediaComposer.cancel" = "Annulla";
 "mediaComposer.captionPlaceholder" = "Aggiungi didascalia...";
+"mediaComposer.clipboard" = "Appunti";
 "mediaComposer.openSettings" = "Apri Impostazioni";
 "mediaComposer.photoAccessMessage" = "Consenti l'accesso alle tue foto nelle Impostazioni";
 "mediaComposer.send" = "Invia";

@@ -5,7 +5,9 @@
   Vietnamese
 */
 "mediaComposer.albumRecent" = "Gần đây";
+"mediaComposer.cancel" = "Hủy";
 "mediaComposer.captionPlaceholder" = "Thêm mô tả...";
+"mediaComposer.clipboard" = "Bảng nhớ tạm";
 "mediaComposer.openSettings" = "Mở Cài đặt";
 "mediaComposer.photoAccessMessage" = "Cho phép truy cập ảnh trong Cài đặt";
 "mediaComposer.send" = "Gửi";

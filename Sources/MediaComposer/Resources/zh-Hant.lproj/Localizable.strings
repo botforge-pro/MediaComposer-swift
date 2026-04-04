@@ -5,7 +5,9 @@
   Chinese (Traditional)
 */
 "mediaComposer.albumRecent" = "最近";
+"mediaComposer.cancel" = "取消";
 "mediaComposer.captionPlaceholder" = "新增說明...";
+"mediaComposer.clipboard" = "剪貼板";
 "mediaComposer.openSettings" = "開啟設定";
 "mediaComposer.photoAccessMessage" = "請在設定中允許取用您的照片";
 "mediaComposer.send" = "傳送";

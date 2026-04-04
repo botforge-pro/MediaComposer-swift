@@ -5,7 +5,9 @@
   Japanese
 */
 "mediaComposer.albumRecent" = "最近";
+"mediaComposer.cancel" = "キャンセル";
 "mediaComposer.captionPlaceholder" = "キャプションを追加...";
+"mediaComposer.clipboard" = "クリップボード";
 "mediaComposer.openSettings" = "設定を開く";
 "mediaComposer.photoAccessMessage" = "設定で写真へのアクセスを許可してください";
 "mediaComposer.send" = "送信";

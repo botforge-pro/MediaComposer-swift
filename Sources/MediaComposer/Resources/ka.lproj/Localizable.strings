@@ -5,7 +5,9 @@
   ka
 */
 "mediaComposer.albumRecent" = "ბოლო";
+"mediaComposer.cancel" = "გაუქმება";
 "mediaComposer.captionPlaceholder" = "დაამატეთ აღწერა...";
+"mediaComposer.clipboard" = "ბუფერი";
 "mediaComposer.openSettings" = "პარამეტრების გახსნა";
 "mediaComposer.photoAccessMessage" = "დაუშვით ფოტოებზე წვდომა პარამეტრებში";
 "mediaComposer.send" = "გაგზავნა";

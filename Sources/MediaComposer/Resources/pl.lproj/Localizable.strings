@@ -5,7 +5,9 @@
   Polish
 */
 "mediaComposer.albumRecent" = "Ostatnie";
+"mediaComposer.cancel" = "Anuluj";
 "mediaComposer.captionPlaceholder" = "Dodaj opis...";
+"mediaComposer.clipboard" = "Schowek";
 "mediaComposer.openSettings" = "Otwórz Ustawienia";
 "mediaComposer.photoAccessMessage" = "Zezwól na dostęp do zdjęć w Ustawieniach";
 "mediaComposer.send" = "Wyślij";

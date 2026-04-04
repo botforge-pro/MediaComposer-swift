@@ -26,4 +26,13 @@ enum L10n {
         bundle: .module
     )
 
+    static let mediaComposerClipboard = String(
+        localized: "mediaComposer.clipboard",
+        bundle: .module
+    )
+
+    static let mediaComposerCancel = String(
+        localized: "mediaComposer.cancel",
+        bundle: .module
+    )
 }

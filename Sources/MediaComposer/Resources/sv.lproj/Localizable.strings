@@ -5,7 +5,9 @@
   Swedish
 */
 "mediaComposer.albumRecent" = "Senaste";
+"mediaComposer.cancel" = "Avbryt";
 "mediaComposer.captionPlaceholder" = "Lägg till en bildtext...";
+"mediaComposer.clipboard" = "Urklipp";
 "mediaComposer.openSettings" = "Öppna Inställningar";
 "mediaComposer.photoAccessMessage" = "Tillåt åtkomst till dina foton i Inställningar";
 "mediaComposer.send" = "Skicka";

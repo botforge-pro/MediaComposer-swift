@@ -5,7 +5,9 @@
   Turkish
 */
 "mediaComposer.albumRecent" = "Son";
+"mediaComposer.cancel" = "İptal";
 "mediaComposer.captionPlaceholder" = "Açıklama ekle...";
+"mediaComposer.clipboard" = "Pano";
 "mediaComposer.openSettings" = "Ayarları Aç";
 "mediaComposer.photoAccessMessage" = "Ayarlardan fotoğraflarınıza erişime izin verin";
 "mediaComposer.send" = "Gönder";

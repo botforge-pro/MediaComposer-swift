@@ -5,7 +5,9 @@
   Thai
 */
 "mediaComposer.albumRecent" = "ล่าสุด";
+"mediaComposer.cancel" = "ยกเลิก";
 "mediaComposer.captionPlaceholder" = "เพิ่มคำบรรยาย...";
+"mediaComposer.clipboard" = "คลิปบอร์ด";
 "mediaComposer.openSettings" = "เปิดการตั้งค่า";
 "mediaComposer.photoAccessMessage" = "อนุญาตการเข้าถึงรูปภาพในการตั้งค่า";
 "mediaComposer.send" = "ส่ง";

@@ -5,7 +5,9 @@
   German
 */
 "mediaComposer.albumRecent" = "Neueste";
+"mediaComposer.cancel" = "Abbrechen";
 "mediaComposer.captionPlaceholder" = "Beschreibung hinzufügen...";
+"mediaComposer.clipboard" = "Zwischenablage";
 "mediaComposer.openSettings" = "Einstellungen öffnen";
 "mediaComposer.photoAccessMessage" = "Erlaube den Zugriff auf deine Fotos in den Einstellungen";
 "mediaComposer.send" = "Senden";

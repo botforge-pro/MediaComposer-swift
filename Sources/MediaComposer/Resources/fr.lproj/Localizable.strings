@@ -5,7 +5,9 @@
   French
 */
 "mediaComposer.albumRecent" = "Récents";
+"mediaComposer.cancel" = "Annuler";
 "mediaComposer.captionPlaceholder" = "Ajouter une légende...";
+"mediaComposer.clipboard" = "Presse-papiers";
 "mediaComposer.openSettings" = "Ouvrir les réglages";
 "mediaComposer.photoAccessMessage" = "Autorisez l'accès à vos photos dans les réglages";
 "mediaComposer.send" = "Envoyer";

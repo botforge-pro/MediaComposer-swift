@@ -5,7 +5,9 @@
   Greek
 */
 "mediaComposer.albumRecent" = "Πρόσφατα";
+"mediaComposer.cancel" = "Ακύρωση";
 "mediaComposer.captionPlaceholder" = "Προσθήκη λεζάντας...";
+"mediaComposer.clipboard" = "Πρόχειρο";
 "mediaComposer.openSettings" = "Άνοιγμα Ρυθμίσεων";
 "mediaComposer.photoAccessMessage" = "Επιτρέψτε πρόσβαση στις φωτογραφίες σας στις Ρυθμίσεις";
 "mediaComposer.send" = "Αποστολή";
