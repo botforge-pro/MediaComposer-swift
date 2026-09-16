@@ -1,7 +1,17 @@
-.PHONY: build clean i18n-extract i18n-apply
+.PHONY: build docs clean i18n-extract i18n-apply
 
 build:
 	xcodebuild build -scheme MediaComposer -destination 'generic/platform=iOS' -skipPackagePluginValidation 2>&1 | tail -20
+
+docs:
+	xcodebuild docbuild -scheme MediaComposer \
+		-destination 'generic/platform=iOS' \
+		-derivedDataPath .build/docc-derived \
+		OTHER_DOCC_FLAGS='--warnings-as-errors'
+	xcrun docc process-archive transform-for-static-hosting \
+		.build/docc-derived/Build/Products/Debug-iphoneos/MediaComposer.doccarchive \
+		--output-path .build/docc \
+		--hosting-base-path MediaComposer-swift
 
 clean:
 	swift package clean

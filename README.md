@@ -1,3 +1,5 @@
+[![Documentation](https://github.com/botforge-pro/MediaComposer-swift/actions/workflows/documentation.yml/badge.svg)](https://botforge-pro.github.io/MediaComposer-swift/documentation/mediacomposer/)
+
 # MediaComposer
 
 A flexible Telegram-style media picker for iOS. Combines camera capture and photo gallery selection in a single sheet interface.
@@ -9,7 +11,7 @@ A flexible Telegram-style media picker for iOS. Combines camera capture and phot
 - Single or multiple photo selection
 - Optional caption input
 - Localized in 29 languages
-- iOS 17+, Swift 5.9+
+- iOS 17+, Swift 6.0+
 
 ## Installation
 
@@ -17,7 +19,7 @@ Add to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "git@github.com:botforge-pro/MediaComposer.git", from: "1.0.0")
+    .package(url: "https://github.com/botforge-pro/MediaComposer-swift.git", from: "1.0.0")
 ]
 ```
 
@@ -112,8 +114,8 @@ Supports 29 languages out of the box:
 ## Requirements
 
 - iOS 17.0+
-- Swift 5.9+
-- Xcode 15.0+
+- Swift 6.0+
+- Xcode 16.0+
 
 ## Privacy
 
@@ -129,3 +131,16 @@ Add to your `Info.plist`:
 ## License
 
 MIT
+
+## Documentation
+
+The [Swift-DocC API reference](https://botforge-pro.github.io/MediaComposer-swift/documentation/mediacomposer/)
+is generated from the public API on every push to `main`.
+
+## Lines of Code
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/loc-history-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset=".github/loc-history-light.svg">
+  <img src=".github/loc-history.svg" alt="Lines of code over time">
+</picture>
