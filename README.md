@@ -128,10 +128,6 @@ Add to your `Info.plist`:
 <string>Take photos to share</string>
 ```
 
-## License
-
-MIT
-
 ## Documentation
 
 The [Swift-DocC API reference](https://botforge-pro.github.io/MediaComposer-swift/documentation/mediacomposer/)
