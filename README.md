@@ -136,7 +136,7 @@ is generated from the public API on every push to `main`.
 ## Lines of Code
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".github/loc-history-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset=".github/loc-history-light.svg">
-  <img src=".github/loc-history.svg" alt="Lines of code over time">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/botforge-pro/MediaComposer-swift/main/.github/loc-history-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/botforge-pro/MediaComposer-swift/main/.github/loc-history-light.svg">
+  <img src="https://raw.githubusercontent.com/botforge-pro/MediaComposer-swift/main/.github/loc-history.svg" alt="Lines of code over time">
 </picture>
