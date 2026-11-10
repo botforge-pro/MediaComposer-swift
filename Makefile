@@ -27,7 +27,8 @@ lint: comments
 test-build:
 	xcodebuild build-for-testing -quiet -scheme $(SCHEME) -destination '$(SIMULATOR_DESTINATION)'
 
-test: test-build
+test:
+	@echo "MediaComposer is UIKit-only: it has no tests without the simulator. Run make device-test."
 
 device-test: test-build
 	xcodebuild test-without-building -quiet -scheme $(SCHEME) -destination '$(SIMULATOR_DESTINATION)' \

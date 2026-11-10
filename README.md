@@ -135,6 +135,20 @@ Add to your `Info.plist`:
 <string>Take photos to share</string>
 ```
 
+## Development
+
+| Command | What it does |
+|---------|--------------|
+| `make lint` | commentcensor, swift-format and SwiftLint |
+| `make format` | formats the sources with swift-format |
+| `make test-build` | builds the tests for the iOS simulator |
+| `make device-test` | runs the tests in one iOS simulator |
+| `make release` | lint, `device-test` and build, then tags the newest `CHANGELOG.md` version |
+
+The package uses UIKit, so every test needs the simulator: `make test` runs nothing and says so,
+and the tests run only through `make device-test`, locally, never in CI. `make release` depends on
+it, so no version is tagged without a passing run.
+
 ## Documentation
 
 The [Swift-DocC API reference](https://botforge-pro.github.io/MediaComposer-swift/documentation/mediacomposer/)
