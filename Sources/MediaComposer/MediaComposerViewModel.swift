@@ -6,172 +6,174 @@ import UIKit
 @MainActor
 @Observable
 final class MediaComposerViewModel {
-    // MARK: - Public State
+  // MARK: - Public State
 
-    private(set) var assets: [PHAsset] = []
-    private(set) var thumbnails: [String: UIImage] = [:]
-    private(set) var selectedAssetIDs: [String] = []
-    private(set) var authorizationStatus: PHAuthorizationStatus = .notDetermined
-    private(set) var hasMoreAssets = true
+  private(set) var assets: [PHAsset] = []
+  private(set) var thumbnails: [String: UIImage] = [:]
+  private(set) var selectedAssetIDs: [String] = []
+  private(set) var authorizationStatus: PHAuthorizationStatus = .notDetermined
+  private(set) var hasMoreAssets = true
 
-    let maxSelection: Int
+  let maxSelection: Int
 
-    // MARK: - Private
+  // MARK: - Private
 
-    private let imageManager = PHCachingImageManager()
-    private let thumbnailSize = CGSize(width: 200, height: 200)
-    private let pageSize = 50
-    private var fetchResult: PHFetchResult<PHAsset>?
+  private let imageManager = PHCachingImageManager()
+  private let thumbnailSize = CGSize(width: 200, height: 200)
+  private let pageSize = 50
+  private var fetchResult: PHFetchResult<PHAsset>?
 
-    // MARK: - Init
+  // MARK: - Init
 
-    init(maxSelection: Int = 1) {
-        self.maxSelection = maxSelection
+  init(maxSelection: Int = 1) {
+    self.maxSelection = maxSelection
+  }
+
+  // MARK: - Public Methods
+
+  func requestAuthorization() async {
+    let status = await PHPhotoLibrary.requestAuthorization(for: .readWrite)
+    authorizationStatus = status
+
+    if status == .authorized || status == .limited {
+      loadInitialAssets()
     }
+  }
 
-    // MARK: - Public Methods
+  func loadMoreIfNeeded(currentAsset: PHAsset) {
+    guard hasMoreAssets else { return }
+    guard let lastAsset = assets.last else { return }
 
-    func requestAuthorization() async {
-        let status = await PHPhotoLibrary.requestAuthorization(for: .readWrite)
-        authorizationStatus = status
+    if currentAsset.localIdentifier == lastAsset.localIdentifier {
+      loadMoreAssets()
+    }
+  }
 
-        if status == .authorized || status == .limited {
-            loadInitialAssets()
+  func toggleSelection(asset: PHAsset) {
+    let id = asset.localIdentifier
+
+    if let index = selectedAssetIDs.firstIndex(of: id) {
+      selectedAssetIDs.remove(at: index)
+    } else if selectedAssetIDs.count < maxSelection {
+      selectedAssetIDs.append(id)
+    } else if maxSelection == 1 {
+      selectedAssetIDs = [id]
+    }
+  }
+
+  func isSelected(asset: PHAsset) -> Bool {
+    selectedAssetIDs.contains(asset.localIdentifier)
+  }
+
+  func selectionIndex(asset: PHAsset) -> Int? {
+    guard let index = selectedAssetIDs.firstIndex(of: asset.localIdentifier) else {
+      return nil
+    }
+    return index + 1
+  }
+
+  func loadThumbnail(for asset: PHAsset) {
+    let id = asset.localIdentifier
+    guard thumbnails[id] == nil else { return }
+
+    let options = PHImageRequestOptions()
+    options.isNetworkAccessAllowed = true
+    options.deliveryMode = .opportunistic
+
+    imageManager.requestImage(
+      for: asset,
+      targetSize: thumbnailSize,
+      contentMode: .aspectFill,
+      options: options
+    ) { [weak self] image, _ in
+      guard let image else { return }
+      Task { @MainActor in
+        self?.thumbnails[id] = image
+      }
+    }
+  }
+
+  func loadFullImage(for asset: PHAsset) async throws -> UIImage {
+    let options = PHImageRequestOptions()
+    options.isNetworkAccessAllowed = true
+    options.deliveryMode = .highQualityFormat
+    options.isSynchronous = false
+
+    return try await withCheckedThrowingContinuation { continuation in
+      imageManager.requestImage(
+        for: asset,
+        targetSize: PHImageManagerMaximumSize,
+        contentMode: .aspectFit,
+        options: options
+      ) { image, info in
+        let isDegraded = (info?[PHImageResultIsDegradedKey] as? Bool) ?? false
+        guard !isDegraded else { return }
+
+        if let error = info?[PHImageErrorKey] as? Error {
+          continuation.resume(throwing: error)
+        } else if let image {
+          continuation.resume(returning: image)
+        } else {
+          continuation.resume(
+            throwing: NSError(
+              domain: "MediaComposer",
+              code: -1,
+              userInfo: [NSLocalizedDescriptionKey: "PHImageManager returned nil image"]
+            ))
         }
+      }
+    }
+  }
+
+  func getSelectedImages() async throws -> [UIImage] {
+    var images: [UIImage] = []
+
+    for id in selectedAssetIDs {
+      guard let asset = assets.first(where: { $0.localIdentifier == id }) else { continue }
+      let image = try await loadFullImage(for: asset)
+      images.append(image)
     }
 
-    func loadMoreIfNeeded(currentAsset: PHAsset) {
-        guard hasMoreAssets else { return }
-        guard let lastAsset = assets.last else { return }
+    return images
+  }
 
-        if currentAsset.localIdentifier == lastAsset.localIdentifier {
-            loadMoreAssets()
-        }
+  func getFirstCoordinates() -> CLLocationCoordinate2D? {
+    for id in selectedAssetIDs {
+      guard let asset = assets.first(where: { $0.localIdentifier == id }),
+        let location = asset.location
+      else { continue }
+      return location.coordinate
+    }
+    return nil
+  }
+
+  // MARK: - Private Methods
+
+  private func loadInitialAssets() {
+    let options = PHFetchOptions()
+    options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+
+    fetchResult = PHAsset.fetchAssets(with: .image, options: options)
+    loadMoreAssets()
+  }
+
+  private func loadMoreAssets() {
+    guard let fetchResult else { return }
+
+    let startIndex = assets.count
+    let endIndex = min(startIndex + pageSize, fetchResult.count)
+
+    guard startIndex < endIndex else {
+      hasMoreAssets = false
+      return
     }
 
-    func toggleSelection(asset: PHAsset) {
-        let id = asset.localIdentifier
-
-        if let index = selectedAssetIDs.firstIndex(of: id) {
-            selectedAssetIDs.remove(at: index)
-        } else if selectedAssetIDs.count < maxSelection {
-            selectedAssetIDs.append(id)
-        } else if maxSelection == 1 {
-            selectedAssetIDs = [id]
-        }
+    var newAssets: [PHAsset] = []
+    for index in startIndex..<endIndex {
+      newAssets.append(fetchResult.object(at: index))
     }
 
-    func isSelected(asset: PHAsset) -> Bool {
-        selectedAssetIDs.contains(asset.localIdentifier)
-    }
-
-    func selectionIndex(asset: PHAsset) -> Int? {
-        guard let index = selectedAssetIDs.firstIndex(of: asset.localIdentifier) else {
-            return nil
-        }
-        return index + 1
-    }
-
-    func loadThumbnail(for asset: PHAsset) {
-        let id = asset.localIdentifier
-        guard thumbnails[id] == nil else { return }
-
-        let options = PHImageRequestOptions()
-        options.isNetworkAccessAllowed = true
-        options.deliveryMode = .opportunistic
-
-        imageManager.requestImage(
-            for: asset,
-            targetSize: thumbnailSize,
-            contentMode: .aspectFill,
-            options: options
-        ) { [weak self] image, _ in
-            guard let image else { return }
-            Task { @MainActor in
-                self?.thumbnails[id] = image
-            }
-        }
-    }
-
-    func loadFullImage(for asset: PHAsset) async throws -> UIImage {
-        let options = PHImageRequestOptions()
-        options.isNetworkAccessAllowed = true
-        options.deliveryMode = .highQualityFormat
-        options.isSynchronous = false
-
-        return try await withCheckedThrowingContinuation { continuation in
-            imageManager.requestImage(
-                for: asset,
-                targetSize: PHImageManagerMaximumSize,
-                contentMode: .aspectFit,
-                options: options
-            ) { image, info in
-                let isDegraded = (info?[PHImageResultIsDegradedKey] as? Bool) ?? false
-                guard !isDegraded else { return }
-
-                if let error = info?[PHImageErrorKey] as? Error {
-                    continuation.resume(throwing: error)
-                } else if let image {
-                    continuation.resume(returning: image)
-                } else {
-                    continuation.resume(throwing: NSError(
-                        domain: "MediaComposer",
-                        code: -1,
-                        userInfo: [NSLocalizedDescriptionKey: "PHImageManager returned nil image"]
-                    ))
-                }
-            }
-        }
-    }
-
-    func getSelectedImages() async throws -> [UIImage] {
-        var images: [UIImage] = []
-
-        for id in selectedAssetIDs {
-            guard let asset = assets.first(where: { $0.localIdentifier == id }) else { continue }
-            let image = try await loadFullImage(for: asset)
-            images.append(image)
-        }
-
-        return images
-    }
-
-    func getFirstCoordinates() -> CLLocationCoordinate2D? {
-        for id in selectedAssetIDs {
-            guard let asset = assets.first(where: { $0.localIdentifier == id }),
-                  let location = asset.location else { continue }
-            return location.coordinate
-        }
-        return nil
-    }
-
-    // MARK: - Private Methods
-
-    private func loadInitialAssets() {
-        let options = PHFetchOptions()
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-
-        fetchResult = PHAsset.fetchAssets(with: .image, options: options)
-        loadMoreAssets()
-    }
-
-    private func loadMoreAssets() {
-        guard let fetchResult else { return }
-
-        let startIndex = assets.count
-        let endIndex = min(startIndex + pageSize, fetchResult.count)
-
-        guard startIndex < endIndex else {
-            hasMoreAssets = false
-            return
-        }
-
-        var newAssets: [PHAsset] = []
-        for index in startIndex..<endIndex {
-            newAssets.append(fetchResult.object(at: index))
-        }
-
-        assets.append(contentsOf: newAssets)
-        hasMoreAssets = endIndex < fetchResult.count
-    }
+    assets.append(contentsOf: newAssets)
+    hasMoreAssets = endIndex < fetchResult.count
+  }
 }
