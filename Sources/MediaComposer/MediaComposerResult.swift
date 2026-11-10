@@ -10,7 +10,7 @@ public enum MediaComposerError: LocalizedError {
     case .noImageInClipboard:
       return "No image in clipboard"
     case .cameraUnavailable(let error):
-      return "Camera preview is unavailable: \(error.localizedDescription)"
+      return error.localizedDescription
     }
   }
 }

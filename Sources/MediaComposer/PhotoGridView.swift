@@ -158,10 +158,25 @@ private struct CameraPreviewCell: View {
   let onTap: () -> Void
   let onError: (Error) -> Void
 
+  private var cameraAccess: AVAuthorizationStatus {
+    AVCaptureDevice.authorizationStatus(for: .video)
+  }
+
   var body: some View {
+    switch cameraAccess {
+    case .denied, .restricted:
+      CameraAccessDeniedCell()
+    case .authorized:
+      cameraButton { CameraPreviewView(onError: onError) }
+    default:
+      cameraButton { Color.black }
+    }
+  }
+
+  private func cameraButton(@ViewBuilder background: () -> some View) -> some View {
     Button(action: onTap) {
       ZStack(alignment: .topTrailing) {
-        CameraPreviewView(onError: onError)
+        background()
 
         Image(systemName: "camera.fill")
           .font(.system(size: 18))
@@ -177,6 +192,26 @@ private struct CameraPreviewCell: View {
   }
 }
 
+private struct CameraAccessDeniedCell: View {
+  var body: some View {
+    Button {
+      if let url = URL(string: UIApplication.openSettingsURLString) {
+        UIApplication.shared.open(url)
+      }
+    } label: {
+      ZStack {
+        Color.black
+
+        Image(systemName: "camera.slash.fill")
+          .font(.system(size: 28))
+          .foregroundStyle(.white)
+      }
+    }
+    .buttonStyle(.plain)
+    .accessibilityLabel(L10n.mediaComposerOpenSettings)
+  }
+}
+
 // MARK: - Camera Preview UIViewRepresentable
 
 private struct CameraPreviewView: UIViewRepresentable {
@@ -187,6 +222,10 @@ private struct CameraPreviewView: UIViewRepresentable {
   }
 
   func updateUIView(_ uiView: CameraPreviewUIView, context: Context) {}
+
+  static func dismantleUIView(_ uiView: CameraPreviewUIView, coordinator: ()) {
+    uiView.stopCamera()
+  }
 }
 
 private final class CameraPreviewUIView: UIView {
@@ -213,6 +252,10 @@ private final class CameraPreviewUIView: UIView {
   override func layoutSubviews() {
     super.layoutSubviews()
     previewLayer?.frame = bounds
+  }
+
+  func stopCamera() {
+    sessionManager?.stop()
   }
 
   private func setupCamera() throws {

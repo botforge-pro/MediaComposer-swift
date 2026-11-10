@@ -27,10 +27,14 @@ Your app's Info.plist needs `NSCameraUsageDescription` and `NSPhotoLibraryUsageD
 - `MediaComposerResult.source` says where the images came from: `.camera`, `.library` or
   `.clipboard`. One result never mixes sources. A photo from the camera is not in the photo library yet, so if your app keeps a
   copy of new photos there, save it only when `source == .camera`.
-- `MediaComposerError.cameraUnavailable` is passed to `onError` when the camera tile cannot show
-  the camera, for example when camera access is denied. The tile then stays black. Tell the user
-  why and offer a way to your app's settings. On a device without a camera, such as the
-  simulator, the tile stays black without an error.
+- When camera access is denied, the camera tile shows a crossed-out camera and opens your app's
+  settings when tapped. Before the user has been asked, the tile stays dark and the camera asks
+  for access when it opens.
+- `MediaComposerError.cameraUnavailable` is passed to `onError` when camera access is granted but
+  the camera tile still cannot show the camera, for example when another app holds the camera.
+  Its description is the system's own, in the user's language. On a device without a camera,
+  such as the simulator, the tile stays dark without an error. If you `switch` over
+  `MediaComposerError` without a `default`, add this case.
 
 ### Changed
 
