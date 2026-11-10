@@ -2,23 +2,27 @@
 import PackageDescription
 
 let package = Package(
-    name: "MediaComposer",
-    defaultLocalization: "en",
-    platforms: [
-        .iOS(.v17)
-    ],
-    products: [
-        .library(
-            name: "MediaComposer",
-            targets: ["MediaComposer"]
-        )
-    ],
-    targets: [
-        .target(
-            name: "MediaComposer",
-            resources: [
-                .process("Resources")
-            ]
-        )
-    ]
+  name: "MediaComposer",
+  defaultLocalization: "en",
+  platforms: [
+    .iOS(.v17)
+  ],
+  products: [
+    .library(
+      name: "MediaComposer",
+      targets: ["MediaComposer"]
+    )
+  ],
+  targets: [
+    .target(
+      name: "MediaComposer",
+      resources: [
+        .process("Resources")
+      ]
+    ),
+    .testTarget(
+      name: "MediaComposerTests",
+      dependencies: ["MediaComposer"]
+    ),
+  ]
 )

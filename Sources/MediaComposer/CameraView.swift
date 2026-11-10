@@ -16,34 +16,33 @@ public struct CameraView: UIViewControllerRepresentable {
     return picker
   }
 
-  public func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context)
-  {}
+  public func updateUIViewController(_ picker: UIImagePickerController, context: Context) {}
 
   public func makeCoordinator() -> Coordinator {
     Coordinator(self)
   }
 
-  public final class Coordinator: NSObject, UIImagePickerControllerDelegate,
-    UINavigationControllerDelegate
-  {
+  public final class Coordinator: NSObject {
     let parent: CameraView
 
     public init(_ parent: CameraView) {
       self.parent = parent
     }
+  }
+}
 
-    public func imagePickerController(
-      _ picker: UIImagePickerController,
-      didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
-    ) {
-      if let image = info[.originalImage] as? UIImage {
-        parent.onCapture(image)
-      }
-      parent.dismiss()
+extension CameraView.Coordinator: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  public func imagePickerController(
+    _ picker: UIImagePickerController,
+    didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+  ) {
+    if let image = info[.originalImage] as? UIImage {
+      parent.onCapture(image)
     }
+    parent.dismiss()
+  }
 
-    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-      parent.dismiss()
-    }
+  public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    parent.dismiss()
   }
 }
