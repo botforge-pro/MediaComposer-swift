@@ -94,7 +94,9 @@ public struct MediaComposerView: View {
         }
         .fullScreenCover(isPresented: $showCamera) {
             CameraView { image in
-                let result = MediaComposerResult(images: [image], caption: captionToSend, coordinates: nil)
+                let result = MediaComposerResult(
+                    images: [image], caption: captionToSend, coordinates: nil, source: .camera
+                )
                 onSend(result)
             }
         }
@@ -105,7 +107,10 @@ public struct MediaComposerView: View {
             ClipboardPreviewSheet(
                 image: pasted.image,
                 onSend: {
-                    let result = MediaComposerResult(images: [pasted.image], caption: captionToSend, coordinates: pastedCoordinates)
+                    let result = MediaComposerResult(
+                        images: [pasted.image], caption: captionToSend, coordinates: pastedCoordinates,
+                        source: .clipboard
+                    )
                     pastedImage = nil
                     pastedCoordinates = nil
                     onSend(result)
@@ -207,7 +212,9 @@ public struct MediaComposerView: View {
         for type in imageTypes {
             guard let data = UIPasteboard.general.data(forPasteboardType: type) else { continue }
             guard let source = CGImageSourceCreateWithData(data as CFData, nil) else { continue }
-            guard let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [String: Any] else { continue }
+            guard let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [String: Any] else {
+                continue
+            }
             guard let gps = properties[kCGImagePropertyGPSDictionary as String] as? [String: Any] else { continue }
             guard let lat = gps[kCGImagePropertyGPSLatitude as String] as? Double,
                   let lon = gps[kCGImagePropertyGPSLongitude as String] as? Double,
@@ -230,7 +237,9 @@ public struct MediaComposerView: View {
             do {
                 let images = try await viewModel.getSelectedImages()
                 let coordinates = viewModel.getFirstCoordinates()
-                let result = MediaComposerResult(images: images, caption: captionToSend, coordinates: coordinates)
+                let result = MediaComposerResult(
+                    images: images, caption: captionToSend, coordinates: coordinates, source: .library
+                )
                 onSend(result)
             } catch {
                 isSending = false
@@ -256,7 +265,7 @@ private struct ClipboardPreviewSheet: View {
         NavigationStack {
             Image(uiImage: image)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color(.systemBackground))

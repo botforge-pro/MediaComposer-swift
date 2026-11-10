@@ -13,14 +13,24 @@ public enum MediaComposerError: LocalizedError {
 }
 
 public struct MediaComposerResult {
+    public enum Source: Sendable, Equatable {
+        case camera
+        case library
+        case clipboard
+    }
+
     public let images: [UIImage]
     public let caption: String?
     public let coordinates: CLLocationCoordinate2D?
+    public let source: Source
 
-    public init(images: [UIImage], caption: String?, coordinates: CLLocationCoordinate2D?) {
+    public init(
+        images: [UIImage], caption: String?, coordinates: CLLocationCoordinate2D?, source: Source
+    ) {
         self.images = images
         self.caption = caption
         self.coordinates = coordinates
+        self.source = source
     }
 
     public var firstImage: UIImage? {

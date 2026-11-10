@@ -167,8 +167,8 @@ final class MediaComposerViewModel {
         }
 
         var newAssets: [PHAsset] = []
-        for i in startIndex..<endIndex {
-            newAssets.append(fetchResult.object(at: i))
+        for index in startIndex..<endIndex {
+            newAssets.append(fetchResult.object(at: index))
         }
 
         assets.append(contentsOf: newAssets)

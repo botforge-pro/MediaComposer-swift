@@ -40,13 +40,14 @@ struct ContentView: View {
             showComposer = true
         }
         .sheet(isPresented: $showComposer) {
-            MediaComposerView { images, caption in
-                // Handle selected images and optional caption
-                print("Selected \(images.count) images")
-                if let caption {
-                    print("Caption: \(caption)")
+            MediaComposerView { result in
+                // result.images, result.caption, result.coordinates
+                if result.source == .camera {
+                    // Taken just now: not in the photo library yet
                 }
                 showComposer = false
+            } onError: { error in
+                // e.g. MediaComposerError.noImageInClipboard
             } onCancel: {
                 showComposer = false
             }
@@ -54,6 +55,10 @@ struct ContentView: View {
     }
 }
 ```
+
+`result.source` says where the images came from: `.camera` for a photo taken in the composer,
+`.library` for photos picked from the library, `.clipboard` for a pasted one. Only camera photos
+are new to the device, so it is the one to check before saving a copy to the library.
 
 ### Configuration
 
@@ -66,7 +71,9 @@ let config = MediaComposerConfiguration(
     captionMode: .optional // .none, .optional, or .required
 )
 
-MediaComposerView(configuration: config) { images, caption in
+MediaComposerView(configuration: config) { result in
+    // ...
+} onError: { error in
     // ...
 } onCancel: {
     // ...
