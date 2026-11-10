@@ -7,6 +7,7 @@ struct PhotoGridView: View {
   @Bindable var viewModel: MediaComposerViewModel
   let showCameraCell: Bool
   let onCameraTap: () -> Void
+  let onCameraError: (Error) -> Void
 
   private let spacing: CGFloat = 2
 
@@ -34,7 +35,7 @@ struct PhotoGridView: View {
             photosGrid(startingAt: 4)
           } else {
             HStack(spacing: spacing) {
-              CameraPreviewCell(onTap: onCameraTap)
+              CameraPreviewCell(onTap: onCameraTap, onError: onCameraError)
                 .frame(width: cellSize, height: cellSize * 2 + spacing)
 
               photoAccessDeniedView
@@ -80,7 +81,7 @@ struct PhotoGridView: View {
 
   private var topSectionWithCamera: some View {
     HStack(spacing: spacing) {
-      CameraPreviewCell(onTap: onCameraTap)
+      CameraPreviewCell(onTap: onCameraTap, onError: onCameraError)
         .frame(width: cellSize, height: cellSize * 2 + spacing)
 
       VStack(spacing: spacing) {
@@ -155,11 +156,12 @@ struct PhotoGridView: View {
 
 private struct CameraPreviewCell: View {
   let onTap: () -> Void
+  let onError: (Error) -> Void
 
   var body: some View {
     Button(action: onTap) {
       ZStack(alignment: .topTrailing) {
-        CameraPreviewView()
+        CameraPreviewView(onError: onError)
 
         Image(systemName: "camera.fill")
           .font(.system(size: 18))
@@ -178,8 +180,10 @@ private struct CameraPreviewCell: View {
 // MARK: - Camera Preview UIViewRepresentable
 
 private struct CameraPreviewView: UIViewRepresentable {
+  let onError: (Error) -> Void
+
   func makeUIView(context: Context) -> CameraPreviewUIView {
-    CameraPreviewUIView()
+    CameraPreviewUIView(onError: onError)
   }
 
   func updateUIView(_ uiView: CameraPreviewUIView, context: Context) {}
@@ -189,10 +193,16 @@ private final class CameraPreviewUIView: UIView {
   private var previewLayer: AVCaptureVideoPreviewLayer?
   private var sessionManager: CameraSessionManager?
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
+  init(onError: @escaping (Error) -> Void) {
+    super.init(frame: .zero)
     backgroundColor = .black
-    setupCamera()
+    do {
+      try setupCamera()
+    } catch {
+      Task { @MainActor in
+        onError(MediaComposerError.cameraUnavailable(error))
+      }
+    }
   }
 
   @available(*, unavailable)
@@ -205,11 +215,11 @@ private final class CameraPreviewUIView: UIView {
     previewLayer?.frame = bounds
   }
 
-  private func setupCamera() {
+  private func setupCamera() throws {
     let manager = CameraSessionManager()
     sessionManager = manager
 
-    guard let session = manager.configure() else { return }
+    guard let session = try manager.configure() else { return }
 
     let preview = AVCaptureVideoPreviewLayer(session: session)
     preview.videoGravity = .resizeAspectFill
@@ -225,13 +235,13 @@ private final class CameraPreviewUIView: UIView {
 private final class CameraSessionManager {
   private var session: AVCaptureSession?
 
-  func configure() -> AVCaptureSession? {
+  func configure() throws -> AVCaptureSession? {
     guard
-      let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
-      let input = try? AVCaptureDeviceInput(device: device)
+      let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
     else {
       return nil
     }
+    let input = try AVCaptureDeviceInput(device: device)
 
     let newSession = AVCaptureSession()
     newSession.beginConfiguration()

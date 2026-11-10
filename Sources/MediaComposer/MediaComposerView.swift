@@ -36,7 +36,8 @@ public struct MediaComposerView: View {
         PhotoGridView(
           viewModel: viewModel,
           showCameraCell: configuration.showCamera,
-          onCameraTap: { showCamera = true }
+          onCameraTap: { showCamera = true },
+          onCameraError: onError
         )
         .allowsHitTesting(!isSending)
 

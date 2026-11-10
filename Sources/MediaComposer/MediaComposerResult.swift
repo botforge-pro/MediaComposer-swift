@@ -3,11 +3,14 @@ import UIKit
 
 public enum MediaComposerError: LocalizedError {
   case noImageInClipboard
+  case cameraUnavailable(any Error)
 
   public var errorDescription: String? {
     switch self {
     case .noImageInClipboard:
       return "No image in clipboard"
+    case .cameraUnavailable(let error):
+      return "Camera preview is unavailable: \(error.localizedDescription)"
     }
   }
 }
