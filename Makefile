@@ -7,7 +7,7 @@ VERSION = $(shell sed -n 's/^\#\# \[\([0-9.]*\)\].*/\1/p' CHANGELOG.md | head -1
 
 .DEFAULT_GOAL := build
 
-.PHONY: install-tools format comments lint test-build test device-test build docs release clean i18n-extract i18n-apply
+.PHONY: install-tools format comments lint test-build test device-test build docs release i18n-extract i18n-apply
 
 install-tools:
 	brew install swiftlint pipx
@@ -54,9 +54,6 @@ release: lint device-test build
 	git tag -a '$(VERSION)' -m '$(VERSION)'
 	git push origin '$(VERSION)'
 	awk '/^## \[$(VERSION)\]/{f=1;next} /^## \[/{f=0} f' CHANGELOG.md | gh release create '$(VERSION)' --title '$(VERSION)' --notes-file -
-
-clean:
-	swift package clean
 
 # Localization workflow:
 # 1. Add new key to Sources/MediaComposer/Resources/en.lproj/Localizable.strings (English only)
